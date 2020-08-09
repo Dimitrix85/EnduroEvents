@@ -4,8 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import HomePage from './pages/home-page/home-page'
 import RegisterPage from './pages/register-page/register-page'
 import ErrorPage from './pages/error-page/error-page'
-import './index.module.css';
-import App from './App';
+import './index.module.css'
 
 ReactDOM.render(
   <React.StrictMode>

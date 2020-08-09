@@ -1,27 +1,66 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import PageLayout from '../../components/page-layout/page-layout'
 import styles from './register-page.module.css'
+import Input from '../../components/input/input'
+import Popup from '../../components/popup/popup'
+import authenticate from '../../utils/authenticate'
+import UserContext from '../../Contex'
 
 const RegisterPage = () => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [rePasswor, setRePassword] = useState('')
+    const [error, setError] = useState(false)
+    const [message, setMessage] = useState('')
+
+    const context = useContext(UserContext)
+    const history = useHistory()
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        setError(false)
+
+        if (username.length < 3) {
+            setError(true)
+            setMessage('Username must longer than 3 symbols')
+            return
+        }
+
+        if(password !== rePasswor || password.length < 6){
+            setError(true)
+            setMessage('Password must match and longer than 6 symbols')
+            return
+        }
+
+        await authenticate('http://localhost:9999/api/user/register',
+            {
+                username,
+                password
+            }, (user) => {
+                context.logIn(user)
+                history.push('/')
+            }, (e) => {
+                console.log('Error', e)
+            })
+    }
+
+
     return (
         <PageLayout>
             <div className={styles["login-box"]}>
-                <h2>Login</h2>
-                <form>
+                <h2>Register</h2>
+                <form onSubmit={e => onSubmit(e)}>
                     <div className={styles["user-box"]}>
-                        <input type="text" id='usename' name="username" required=""></input>
-                        <label for='username'>Username</label>
+                        <Input id='username' title="Username" onChange={e => setUsername(e.target.value)} />
                     </div>
                     <div className={styles["user-box"]}>
-                        <input type="password" id='password' name="password" required=""></input>
-                        <label for='password'>Password</label>
+                        <Input type='password' id='password' title="Password" onChange={e => setPassword(e.target.value)} />
                     </div>
                     <div className={styles["user-box"]}>
-                        <input type="password" id='rePassword' name="rePassword" required=""></input>
-                        <label for='rePassword'>Re-Password</label>
+                        <Input type='password' id='rePassword' title="Re-Password" onChange={e => setRePassword(e.target.value)} />
                     </div>
-                    <Link to='/user/register'>
+                    <Link onClick={e => onSubmit(e)}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -30,6 +69,7 @@ const RegisterPage = () => {
                         </Link>
                 </form>
             </div>
+            { error ? <Popup message={message} action={()=> setError(false)}/> : <span></span>}
         </PageLayout>
     )
 }

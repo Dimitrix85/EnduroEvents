@@ -7,7 +7,7 @@ ul {
 
 .listItem a {
     font-family: 'Times New Roman', Times, serif;
-    color: #234465;
+    color: white;
     font-size: 20px;
     margin: 2px;
     padding: 2px;
@@ -40,7 +40,9 @@ ul {
 }
 
 .mainNavigation {
+    padding: 3px 0 0;
     display: flex;
+    background: rgba(0,0,0,.5);
     border-bottom: 2px solid #234465;
 }
 
