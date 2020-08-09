@@ -13,25 +13,25 @@ const Header = () => {
                 <img className={styles.logo} src={Logo} alt='EnduroLogo'></img>
                 <div className={styles.navigation}>
                     <ul >
-                        <li className={styles.listItem}>
-                            <a href='/'>
+                    <li className={styles.listItem}>
+                            <Link to='/'>
                                 Home
-                        </a>
+                        </Link>
                         </li>
                         <li className={styles.listItem}>
-                            <a href='/register'>
+                            <Link to='/story'>
+                                Stories
+                        </Link>
+                        </li>
+                        <li className={styles.listItem}>
+                            <Link to='/enduro'>
                                 Motorcycle
-                        </a>
+                        </Link>
                         </li>
                         <li className={styles.listItem}>
-                            <a href='/register'>
+                            <Link to='/bicycle'>
                                 Bicycle
-                        </a>
-                        </li>
-                        <li className={styles.listItem}>
-                            <a href='/register'>
-                                Motorcycle
-                        </a>
+                        </Link>
                         </li>
                     </ul>
                 </div>
@@ -39,14 +39,14 @@ const Header = () => {
                 <div className={styles.userNavigation}>
                     <ul>
                         <li className={styles.listItem}>
-                            <a href='/'>
+                            <Link to='/user/register'>
                                 Register
-                        </a>
+                        </Link>
                         </li>
                         <li className={styles.listItem}>
-                            <a href='/register'>
+                            <Link to='/user/login'>
                                 Login
-                        </a>
+                        </Link>
                         </li>
                     </ul>
                 </div>
