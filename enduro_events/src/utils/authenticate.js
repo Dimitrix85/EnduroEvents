@@ -10,6 +10,10 @@ const authenticate = async (url, body, onSuccess, onFail) => {
         })
 
         const authToken = promise.headers.get('Authorization');
+        if(!authToken){
+            onFail()
+            return
+        }
         document.cookie = `x-auth-token=${authToken}`
 
         const data = await promise.json();
