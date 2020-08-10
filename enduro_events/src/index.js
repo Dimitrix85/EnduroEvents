@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import App from './App'
 import HomePage from './pages/home-page/home-page'
 import RegisterPage from './pages/register-page/register-page'
 import LoginPage from './pages/login-page/login-page'
@@ -9,7 +10,7 @@ import './index.module.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App> */}
+    <App>
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={HomePage} />
@@ -18,7 +19,7 @@ ReactDOM.render(
         <Route component={ErrorPage} />
       </Switch>
     </BrowserRouter>
-    {/* </App> */}
+    </App>
   </React.StrictMode>,
   document.getElementById('root')
 );

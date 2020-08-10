@@ -7,7 +7,7 @@ const Popup = ({message, action}) => {
             <div id="popup1" className={styles.overlay}>
                 <div className={styles.popup}>
                     <h2>You need to change</h2>
-                    <a className={styles.close} onClick={action}>&times;</a>
+                    <button className={styles.close} onClick={action}>&times;</button>
                     <div className={styles.content}>
                         {message}
                     </div>

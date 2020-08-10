@@ -1,5 +1,5 @@
 import React, {  useState, useEffect } from 'react'
-import UserContext from './Context'
+import UserContext from './Contex'
 
 function getCookie(name) {
     const cookieValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');

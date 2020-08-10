@@ -27,7 +27,7 @@ const Aside = () => {
             <div className={styles.lastEvent}>
                 <article>Last Motorcycle Event</article>
                 <p>Karnare</p>
-                <hr class="dashes"></hr>
+                <hr className="dashes"></hr>
                 <article>Last Bicycle Event</article>
                 <p>Vitosha 100 </p>
             </div>
