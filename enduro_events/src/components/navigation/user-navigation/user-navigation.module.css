@@ -1,0 +1,39 @@
+.navigation {
+    flex: 0 0 35%;
+}
+
+.listItem {
+    display: inline-block;
+    height: auto;
+    margin-right: 2%;
+    cursor: pointer;
+    padding: 0.5%;
+    margin: 0.1%;
+    vertical-align: top;
+}
+
+.listItem a {
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    font-size: 20px;
+    margin: 2px;
+    padding: 2px;
+    text-decoration: none;
+}
+
+nav .listItem:hover {
+    border-top: none;
+    font-weight: bold;
+}
+
+.userNavigation { 
+    flex: 1;
+    text-align: right;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    margin-top: 6px;
+}
