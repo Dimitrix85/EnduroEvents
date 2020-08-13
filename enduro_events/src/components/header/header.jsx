@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react'
+import React from 'react'
 import styles from './header.module.css'
 import Logo from '../../public/enduroLogo.png'
 import Moutain from '../../public/wideMountain.png'

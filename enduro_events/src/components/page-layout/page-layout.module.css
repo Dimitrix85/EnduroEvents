@@ -11,8 +11,9 @@
   
   .main {
     display: inline-block;
-    width: 75%;
+    width: 100%;
     height: 89.5vh;
+    text-align: center;
     /* height: auto; */
     margin-bottom: 5%;
   }

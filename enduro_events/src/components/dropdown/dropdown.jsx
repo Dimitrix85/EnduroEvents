@@ -13,10 +13,10 @@ const DropDown = ({ title, url, links }) => {
                     {title}
                 </Link>
                 <div className={styles['dropdown-content']}>
-                    {links.map(x => {
+                    {links.map((x,i) => {
 
                         return (
-                            <Link to={x.url}>
+                            <Link key={i} to={x.url}>
                                 {x.title}
                             </Link>
                         )

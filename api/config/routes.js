@@ -6,5 +6,7 @@ module.exports = (app) => {
 
     app.use('/api/story', router.story);
 
+    app.use('/api/utils', router.utils);
+
     app.use('*', (req, res, next) => res.send('<h1> Something went wrong. Try again. :thumbsup: </h1>'))
 };
