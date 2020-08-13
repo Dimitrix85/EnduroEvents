@@ -12,6 +12,9 @@ const storySchema = new Schema({
         type: String,
         requre: true
     },
+    img: {
+        type: String
+    },
     likes: {
         type: Number,
         default: 0

@@ -1,37 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import {  useHistory } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import PageLayout from '../../../components/page-layout/page-layout'
 import Cloudinary from '../../../utils/cloudinary'
 import styles from './create-story.module.css'
 import Input from '../../../components/input/input'
+import UserContext from '../../../Contex'
 
 const CreateStory = () => {
 
-    // const [fileInputState, setFileInputState] = useState()
-    // const [selectedFile, setSelectedFile] = useState()
+    const [fileInputState, setFileInputState] = useState("")
+    const [previewSource, setPreviewSource] = useState("")
+    const [selectedFile, setSelectedFile] = useState("")
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
 
-    // const handleFileInputChange = (e) => {
-    //     const file = e.target.files[0]
-    //     setSelectedFile(file)
-    //     setFileInputState(e.target.value)
-    //     console.log(fileInputState)
-    // }
-
-    // const handleSubmitFile = async (e) => {
-    //     e.preventDefault()
-    //     if (!selectedFile) {
-    //         return
-    //     }
-
-    //     const data = await Cloudinary(selectedFile)
-    //     console.log(data.url)
-    // }
-
-    const [fileInputState, setFileInputState] = useState('')
-    const [previewSource, setPreviewSource] = useState('')
-    const [selectedFile, setSelectedFile] = useState()
-    const [imgUrl, setImgUrl] = useState()
-    const [title, setTitle] = useState()
+    const context = useContext(UserContext)
+    const history = useHistory();
 
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
@@ -50,19 +35,47 @@ const CreateStory = () => {
 
     const handleSubmitFile = (e) => {
         e.preventDefault()
-        if (!selectedFile) return
-        const reader = new FileReader()
-        reader.readAsDataURL(selectedFile)
-        reader.onloadend = async () => {
-            const urlsssss = await uploadImage(reader.result);
 
+        let story = {}
+        if (!selectedFile) {
+            story = {
+                title,
+                description,
+                author: context.user.id
+            }
+
+        } else {
+
+            const reader = new FileReader()
+            reader.readAsDataURL(selectedFile)
+            reader.onloadend = async () => {
+                const url = await uploadImage(reader.result);
+                story = {
+                    title,
+                    description,
+                    img: url.secure_url,
+                    author: context.user.id
+                }
+            }
         }
+        setTimeout(async () => {
+         
+            await fetch('http://localhost:9999/api/story/', {
+                method: 'POST',
+                body: JSON.stringify(story),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            history.push('/')
+
+        }, 1500);
     };
 
     const uploadImage = async (base64EncodedImage) => {
         try {
             const data = await Cloudinary(base64EncodedImage)
-            setImgUrl(data.secure_url)
             setFileInputState('')
             setPreviewSource('')
             return data
@@ -80,7 +93,7 @@ const CreateStory = () => {
                         <Input id='title' title="Title" onChange={e => setTitle(e.target.value)} />
                     </div>
                     <div className={styles["user-box"]}>
-                        <textarea rows="10" cols="80" id='title' title="Title" onChange={e => setTitle(e.target.value)} />
+                        <textarea rows="10" cols="80" id='title' title="Title" onChange={e => setDescription(e.target.value)} />
                     </div>
                     <div>
                         <input
@@ -90,7 +103,7 @@ const CreateStory = () => {
                             onChange={handleFileInputChange}
                             value={fileInputState}
                         />
-                        <label for="file" className={styles.inputLabel}>Upload image</label>
+                        <label htmlFor="file" className={styles.inputLabel}>Upload image</label>
                     </div>
                     {previewSource && (
                         <div>
@@ -110,31 +123,6 @@ const CreateStory = () => {
                         </Link>
                 </form>
             </div>
-
-
-            {/* <div>
-                <h1 className="title">Upload an Image</h1>
-                <form onSubmit={handleSubmitFile} className="form">
-                    <input
-                        id="fileInput"
-                        type="file"
-                        name="image"
-                        onChange={handleFileInputChange}
-                        value={fileInputState}
-                        className="form-input"
-                    />
-                    <button className="btn" type="submit">
-                        Submit
-                </button>
-                </form>
-                {previewSource && (
-                    <img
-                        src={previewSource}
-                        alt="chosen"
-                        style={{ height: '300px' }}
-                    />
-                )}
-            </div> */}
         </PageLayout>
     )
 }
