@@ -4,4 +4,6 @@ const { auth } = require('../utils');
 
 router.get('/', controllers.story.get);
 
+router.post('/', controllers.story.post);
+
 module.exports = router;
