@@ -9,7 +9,6 @@ function PageLayout(props) {
     <div className={styles.app}>
       <div className={styles.container}>
         <Header />
-        <Aside />
         <main className={styles.main}>
           {props.children}
         </main>

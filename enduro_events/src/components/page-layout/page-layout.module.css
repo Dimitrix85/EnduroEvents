@@ -12,6 +12,7 @@
   .main {
     display: inline-block;
     width: 75%;
-    height: auto;
+    height: 89.5vh;
+    /* height: auto; */
     margin-bottom: 5%;
   }
