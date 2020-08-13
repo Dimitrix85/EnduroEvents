@@ -1,16 +1,15 @@
 import React, { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import PageLayout from '../../components/page-layout/page-layout'
-import styles from './register-page.module.css'
-import Input from '../../components/input/input'
-import Popup from '../../components/popup/popup'
-import authenticate from '../../utils/authenticate'
-import UserContext from '../../Contex'
+import PageLayout from '../../../components/page-layout/page-layout'
+import styles from './login-page.module.css'
+import Input from '../../../components/input/input'
+import Popup from '../../../components/popup/popup'
+import authenticate from '../../../utils/authenticate'
+import UserContext from '../../../Contex'
 
-const RegisterPage = () => {
+const LoginPage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [rePasswor, setRePassword] = useState('')
     const [error, setError] = useState(false)
     const [message, setMessage] = useState('')
 
@@ -21,19 +20,8 @@ const RegisterPage = () => {
         e.preventDefault()
         setError(false)
 
-        if (username.length < 3) {
-            setError(true)
-            setMessage('Username must longer than 3 symbols')
-            return
-        }
 
-        if(password !== rePasswor || password.length < 6){
-            setError(true)
-            setMessage('Password must match and longer than 6 symbols')
-            return
-        }
-
-        await authenticate('http://localhost:9999/api/user/register',
+        await authenticate('http://localhost:9999/api/user/login',
             {
                 username,
                 password
@@ -41,7 +29,8 @@ const RegisterPage = () => {
                 context.logIn(user)
                 history.push('/')
             }, (e) => {
-                console.log('Error', e)
+                setError(true)
+                setMessage("Invalid username or password")
             })
     }
 
@@ -49,7 +38,7 @@ const RegisterPage = () => {
     return (
         <PageLayout>
             <div className={styles["login-box"]}>
-                <h2>Register</h2>
+                <h2>Login</h2>
                 <form onSubmit={e => onSubmit(e)}>
                     <div className={styles["user-box"]}>
                         <Input id='username' title="Username" onChange={e => setUsername(e.target.value)} />
@@ -57,15 +46,12 @@ const RegisterPage = () => {
                     <div className={styles["user-box"]}>
                         <Input type='password' id='password' title="Password" onChange={e => setPassword(e.target.value)} />
                     </div>
-                    <div className={styles["user-box"]}>
-                        <Input type='password' id='rePassword' title="Re-Password" onChange={e => setRePassword(e.target.value)} />
-                    </div>
                     <Link onClick={e => onSubmit(e)}>
                         <span></span>
                         <span></span>
                         <span></span>
                         <span></span>
-                         Register
+                         Login
                         </Link>
                 </form>
             </div>
@@ -74,4 +60,4 @@ const RegisterPage = () => {
     )
 }
 
-export default RegisterPage
+export default LoginPage

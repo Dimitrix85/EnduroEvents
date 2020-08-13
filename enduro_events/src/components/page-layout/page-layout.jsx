@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './page-layout.module.css';
 import Header from '../header/header'
 import Footer from '../footer/footer'
-import Aside from '../aside/aside'
 
 function PageLayout(props) {
   return (

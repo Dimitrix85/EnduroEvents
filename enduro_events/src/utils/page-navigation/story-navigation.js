@@ -6,7 +6,7 @@ const links = (isLoggedIn) =>{
         },
         {
             title: 'Write Story',
-            url: '/story/write'
+            url: '/story/create'
         }
     ]
 
