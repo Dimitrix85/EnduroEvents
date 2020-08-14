@@ -10,19 +10,34 @@ module.exports = {
                 .catch(next);
         },
         top: (req, res, next) => {
-            models.Story.find().sort([['likes', -1]]).limit(2).populate('author')
+            models.Story.find().sort([['like', -1]]).limit(2).populate('author')
                 .then(stories => res.send(stories))
                 .catch(next)
         },
         details: (req, res, next) => {
-            models.Story.findById(req.query.id)
-            .then((story) => res.send(story))
-            .catch((err) => res.status(500).send("Error"))
+            models.Story.findById(req.query.id).populate('author')
+                .then((story) => res.send(story))
+                .catch((err) => res.status(500).send("Error"))
         }
     },
+    put: (req, res, next) => {
+        const id = req.params.id
+        const { userId } = req.body
+
+        models.Story.update({ _id: id }, {
+            $addToSet: {
+                likes: [userId]
+            }, $inc: {
+                like: 1
+            }
+        })
+            .then((updated) => res.send(updated))
+            .catch(next)
+
+    },
     post: (req, res, next) => {
-        const { title, description, img, author } = req.body
-        models.Story.create({ title, description, img, author })
+        const { title, description, img, author, created_at } = req.body
+        models.Story.create({ title, description, img, author, created_at })
             .then(data => {
                 res.send(data)
             })

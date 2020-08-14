@@ -15,15 +15,23 @@ const storySchema = new Schema({
     img: {
         type: String
     },
-    likes: {
+    like: {
         type: Number,
         default: 0
     },
+    likes:[
+        {
+            type: ObjectId,
+            ref: 'User'
+        }
+    ],
     author: {
         type: ObjectId,
         ref: 'User'
+    },
+    created_at: {
+        type: String,
+        required: true
     }
-},
-    { timestamps: { createdAt: 'created_at' } })
-
+})
 module.exports = new Model('Story', storySchema)

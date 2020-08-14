@@ -5,14 +5,14 @@ const utils = require('../utils');
 module.exports = {
     get: (req, res, next) => {
         models.User.findById(req.query.id)
-        .then((user) => res.send(user))
-        .catch((err) => res.status(500).send("Error"))
+            .then((user) => res.send(user))
+            .catch((err) => res.status(500).send("Error"))
     },
 
     post: {
         register: (req, res, next) => {
-            const { username, password } = req.body;
-            models.User.create({ username, password })
+            const { username, password, created_at } = req.body;
+            models.User.create({ username, password, created_at })
                 .then((createdUser) => {
                     const token = utils.jwt.createToken({ id: createdUser._id });
                     res.header("Authorization", token).send(createdUser);
@@ -35,26 +35,26 @@ module.exports = {
                 })
                 .catch(next);
         },
-        verify: (req, res, next) =>{
+        verify: (req, res, next) => {
             const token = req.body.token || '';
 
-              utils.jwt.verifyToken(token)
-              .then((data) => {
-                  models.User.findById(data.id)
-                      .then((user) => {
-                          return res.send({
-                            status: true,
-                            user
-                          })
-                      });
-              })
-              .catch(err => {
-                  if (!redirectAuthenticated) { next(); return; }
-                  
-                  res.send({
-                    status: false
-                  })
-              })
+            utils.jwt.verifyToken(token)
+                .then((data) => {
+                    models.User.findById(data.id)
+                        .then((user) => {
+                            return res.send({
+                                status: true,
+                                user
+                            })
+                        });
+                })
+                .catch(err => {
+                    if (!redirectAuthenticated) { next(); return; }
+
+                    res.send({
+                        status: false
+                    })
+                })
         }
     },
 

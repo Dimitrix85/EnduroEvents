@@ -23,9 +23,11 @@ const bicycleSchema = new Schema({
     participants: [{
         type: ObjectId,
         ref: 'User'
-    }]
-},
-    { timestamps: { createdAt: 'created_at' } 
+    }],
+    created_at: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = new Model('Bicycle', bicycleSchema)
