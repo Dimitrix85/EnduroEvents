@@ -51,7 +51,8 @@ const CreateStory = () => {
             story = {
                 title,
                 description,
-                author: context.user.id
+                author: context.user.id,
+                created_at: new Date()
             }
 
         } else {
@@ -64,7 +65,8 @@ const CreateStory = () => {
                     title,
                     description,
                     img: urlssss.secure_url,
-                    author: context.user.id
+                    author: context.user.id,
+                    created_at: new Date()
                 }
             }
         }

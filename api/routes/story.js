@@ -10,4 +10,6 @@ router.get('/details', controllers.story.get.details);
 
 router.post('/', controllers.story.post);
 
+router.put('/:id', controllers.story.put)
+
 module.exports = router;
