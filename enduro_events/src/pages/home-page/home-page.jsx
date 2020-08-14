@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PageLayout from '../../components/page-layout/page-layout'
-import HomeStory from '../../components/home-story/home-story'
+import StoryCard from '../../components/story-card/story-card'
 
 const HomePage = () => {
 
@@ -15,7 +15,7 @@ const HomePage = () => {
     const renderStories = () => {
         return data.map((story, index) => {
             return (
-                <HomeStory key={index} description={story.description}
+                <StoryCard key={index} description={story.description}
                  title={story.title} img={story.img} id={story._id} />
             )
         })
@@ -23,11 +23,12 @@ const HomePage = () => {
 
     useEffect(() => {
         getStories()
-    }, [getStories])
+    }, [])
 
     return (
         <PageLayout>
             <div>
+                <h1>Top liked stories</h1>
                 {renderStories()}
             </div>
         </PageLayout>

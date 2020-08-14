@@ -6,6 +6,8 @@ router.get('/', controllers.story.get.all);
 
 router.get('/top', controllers.story.get.top);
 
+router.get('/details', controllers.story.get.details);
+
 router.post('/', controllers.story.post);
 
 module.exports = router;

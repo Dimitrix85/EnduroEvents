@@ -78,7 +78,7 @@ const CreateStory = () => {
                 }
             })
 
-            history.push('/')
+            history.push('/story')
 
         }, 2000);
     };
