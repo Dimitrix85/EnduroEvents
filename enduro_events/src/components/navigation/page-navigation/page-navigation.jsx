@@ -24,8 +24,7 @@ const PageNavigation = () => {
                         Home
                         </Link>
                 </li>
-                {context.loggedIn ? <DropDown title='Story' url='/story' links={storyLinks} />: null}
-
+                <DropDown title='Story' url='/story' links={storyLinks} />
                 <DropDown title='Motorcycle' url='/enduro' links={motorcycleLinks} />
                 <DropDown title='Bicycle' url='/bicycle' links={bicycleLinks} />
             </ul>
