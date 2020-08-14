@@ -6,6 +6,7 @@ import Cloudinary from '../../../utils/cloudinary'
 import styles from './create-story.module.css'
 import Input from '../../../components/input/input'
 import UserContext from '../../../Contex'
+import Popup from '../../../components/popup/popup'
 
 const CreateStory = () => {
 
@@ -14,6 +15,8 @@ const CreateStory = () => {
     const [selectedFile, setSelectedFile] = useState("")
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [error, setError] = useState(false)
+    const [message, setMessage] = useState('')
 
     const context = useContext(UserContext)
     const history = useHistory();
@@ -35,6 +38,13 @@ const CreateStory = () => {
 
     const handleSubmitFile = (e) => {
         e.preventDefault()
+        setError(false)
+
+        if (!title || !description) {
+            setError(true)
+            setMessage('Title and description are required')
+            return
+        }
 
         let story = {}
         if (!selectedFile) {
@@ -49,11 +59,11 @@ const CreateStory = () => {
             const reader = new FileReader()
             reader.readAsDataURL(selectedFile)
             reader.onloadend = async () => {
-                const url = await uploadImage(reader.result);
+                const urlssss = await uploadImage(reader.result);
                 story = {
                     title,
                     description,
-                    img: url.secure_url,
+                    img: urlssss.secure_url,
                     author: context.user.id
                 }
             }
@@ -70,7 +80,7 @@ const CreateStory = () => {
 
             history.push('/')
 
-        }, 1500);
+        }, 2000);
     };
 
     const uploadImage = async (base64EncodedImage) => {
@@ -123,6 +133,7 @@ const CreateStory = () => {
                         </Link>
                 </form>
             </div>
+            { error ? <Popup message={message} action={()=> setError(false)}/> : <span></span>}
         </PageLayout>
     )
 }
