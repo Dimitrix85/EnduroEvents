@@ -1,71 +1,58 @@
-import React, { useState } from 'react'
-import ReactPaginate from 'react-paginate';
+import React, { useState, useEffect, useMemo, useContext } from 'react'
 import styles from './all-enduro.module.css'
 import PageLayout from '../../../components/page-layout/page-layout'
-import StoryCard from '../../../components/story-card/story-card'
-import { useEffect } from 'react';
+import TableRow from '../../../components/tableRow/tableRow'
+import UserContext from '../../../Contex'
 
 const AllEnduro = () => {
 
-    const [offset, setOffset] = useState(0)
     const [data, setData] = useState([])
-    const [perPage, setPerPage] = useState(5)
-    const [currentPage, setCurrentPage] = useState(0)
-    const [pageCount, setPageCount] = useState()
-    const [postData, setPostData] = useState()
+    const context = useContext(UserContext)
 
     const receivedData = async () => {
 
-        const res = await fetch(`http://localhost:9999/api/story`)
+        const res = await fetch(`http://localhost:9999/api/enduro`)
 
+        const jsonData = await res.json()
 
-        const data = await res.json();
-        const slice = data.slice(offset, offset + perPage)
-
-        const postData = slice.map((story, index) => {
-            return (<StoryCard key={index} description={story.description}
-                title={story.title} img={story.img} id={story._id} />)
-        }
-        )
-
-        setPageCount(Math.ceil(data.length / perPage))
-
-        setPostData(postData)
+        setData(jsonData)
     }
 
-    const handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        const offset = selectedPage * perPage;
+    const updateData = (updatedData) => {
+        console.log(updatedData)
+        setData(updatedData)
+    }
 
-        setCurrentPage(selectedPage)
-        setOffset(offset)
-        receivedData()
-
-    };
+    const renderEvents = useMemo(() => {
+        const userId = context.user && context.user.id
+        return data.map((event, index) => {
+            return (
+                <TableRow key={index} event={event} userId={userId} handler={updateData} />
+            )
+        })
+    }, [data])
 
     useEffect(() => {
         receivedData()
-    })
-    
+    }, [])
+
     return (
         <PageLayout>
             <div>
-                <h1>Enduro</h1>
-                {postData}
-                <div className={styles.container}>
-                    <ReactPaginate
-                        previousLabel={"prev"}
-                        nextLabel={"next"}
-                        breakLabel={"..."}
-                        breakClassName={styles["break-me"]}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick}
-                        containerClassName={styles["pagination"]}
-                        subContainerClassName={styles["pages pagination"]}
-                        activeClassName={styles["active"]} />
-                </div>
+                <table className={styles.customers}>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Start Poin</th>
+                            <th>Skill level</th>
+                            <th>Participants</th>
+                            {context.loggedIn ? <th>Join</th> : null}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderEvents}
+                    </tbody>
+                </table>
             </div>
         </PageLayout>
     )

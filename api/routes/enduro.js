@@ -6,4 +6,6 @@ router.get('/', controllers.enduro.get)
 
 router.post('/', controllers.enduro.post)
 
+router.put('/:id', controllers.enduro.put)
+
 module.exports = router;
