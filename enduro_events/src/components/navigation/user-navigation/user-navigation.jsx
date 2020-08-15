@@ -20,9 +20,9 @@ const UserNavigation = () => {
                 {context.loggedIn ? (
                     <Fragment>
                         <li className={styles.listItem}>
-                            <a>
+                            <Link>
                                 {context.user && context.user.username}
-                            </a>
+                            </Link>
                         </li>
                         <li className={styles.listItem}>
                             <Link onClick={() => logout()}>

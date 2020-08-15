@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import styles from './page-navigation.module.css'
 import DropDown from '../../dropdown/dropdown'
 import StoryNavigation from '../../../utils/page-navigation/story-navigation'
-import MotorcycleNavigation from '../../../utils/page-navigation/motorcycle-navigation'
-import BicycleNavigation from '../../../utils/page-navigation/bicycle-navigation'
+import EnduroNavigation from '../../../utils/page-navigation/enduro-navigation'
 import UserContext from '../../../Contex'
 
 
@@ -13,8 +12,7 @@ const PageNavigation = () => {
     const context = useContext(UserContext)
 
     const storyLinks = StoryNavigation(context.loggedIn)
-    const motorcycleLinks = MotorcycleNavigation(context.loggedIn)
-    const bicycleLinks = BicycleNavigation(context.loggedIn)
+    const motorcycleLinks = EnduroNavigation(context.loggedIn)
 
     return (
         <div className={styles.navigation}>
@@ -25,8 +23,7 @@ const PageNavigation = () => {
                         </Link>
                 </li>
                 <DropDown title='Story' url='/story' links={storyLinks} />
-                <DropDown title='Motorcycle' url='/enduro' links={motorcycleLinks} />
-                <DropDown title='Bicycle' url='/bicycle' links={bicycleLinks} />
+                <DropDown title='Enduro' url='/enduro' links={motorcycleLinks} />
             </ul>
         </div>
     )
