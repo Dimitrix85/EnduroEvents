@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import UserContext from '../../../Contex'
 import PageLayout from '../../../components/page-layout/page-layout'
 import styles from './story-details.module.css'
@@ -10,6 +10,7 @@ const StoryDetails = (props) => {
     const [date, setDate] = useState('')
     const [author, setAuthor] = useState('')
     const [likes, setLikes] = useState('')
+    const [canLike, setCanLike] = useState(true)
 
     const context = useContext(UserContext)
     const history = useHistory()
@@ -23,6 +24,7 @@ const StoryDetails = (props) => {
         }
 
         const story = await response.json()
+        setCanLike(context.user && (story.likes.includes(context.user.id) ? false : true))
         setLikes(story.like)
         setStory(story && story)
         setDate(story.created_at.toString().split('T')[0])
@@ -32,7 +34,7 @@ const StoryDetails = (props) => {
     const updateLike = async () => {
         const updated = await fetch(`http://localhost:9999/api/story/${props.match.params.id}`, {
             method: 'PUT',
-            body: JSON.stringify({userId:context.user.id}),
+            body: JSON.stringify({ userId: context.user.id }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -56,16 +58,24 @@ const StoryDetails = (props) => {
                 <div>
                     <span>{date}</span>
                     <span>
-                        <Link onClick={updateLike}>
-                            <img width="30px" src={LikeIcon}/> {likes}
-                        </Link>
+                        {context.loggedIn ?
+                            (
+                                canLike ?
+                                    <button onClick={updateLike}>
+                                        < img width="30px" src={LikeIcon} alt='like' /> {likes}
+                                    </button>
+                                    : <button>
+                                        <img width="30px" src={LikeIcon} alt='like' /> {likes}
+                                    </button>)
+                            : null
+                        }
                     </span>
                     <span>
                         Author: {author}
                     </span>
                 </div>
             </div>
-        </PageLayout>
+        </PageLayout >
 
     )
 }

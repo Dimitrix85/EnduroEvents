@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import {  useHistory } from 'react-router-dom'
 import PageLayout from '../../../components/page-layout/page-layout'
 import styles from './register-page.module.css'
 import Input from '../../../components/input/input'
 import Popup from '../../../components/popup/popup'
 import authenticate from '../../../utils/authenticate'
 import UserContext from '../../../Contex'
+import Button from '../../../components/submitButton/submitButton'
 
 const RegisterPage = () => {
     const [username, setUsername] = useState('')
@@ -61,13 +62,7 @@ const RegisterPage = () => {
                     <div className={styles["user-box"]}>
                         <Input type='password' id='rePassword' title="Re-Password" onChange={e => setRePassword(e.target.value)} />
                     </div>
-                    <Link onClick={e => onSubmit(e)}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                         Register
-                        </Link>
+                   <Button title='Register' onClick={e => onSubmit(e)}/>
                 </form>
             </div>
             { error ? <Popup message={message} action={()=> setError(false)}/> : <span></span>}
