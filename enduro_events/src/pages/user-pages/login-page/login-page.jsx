@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import PageLayout from '../../../components/page-layout/page-layout'
 import styles from './login-page.module.css'
 import Input from '../../../components/input/input'
 import Popup from '../../../components/popup/popup'
 import authenticate from '../../../utils/authenticate'
 import UserContext from '../../../Contex'
+import Button from '../../../components/submitButton/submitButton'
 
 const LoginPage = () => {
     const [username, setUsername] = useState('')
@@ -46,13 +47,8 @@ const LoginPage = () => {
                     <div className={styles["user-box"]}>
                         <Input type='password' id='password' title="Password" onChange={e => setPassword(e.target.value)} />
                     </div>
-                    <Link onClick={e => onSubmit(e)}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                         Login
-                        </Link>
+        
+                        <Button title='Login' onClick={e => onSubmit(e)}/>
                 </form>
             </div>
             { error ? <Popup message={message} action={()=> setError(false)}/> : <span></span>}

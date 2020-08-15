@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react'
 import {  useHistory } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import PageLayout from '../../../components/page-layout/page-layout'
 import Cloudinary from '../../../utils/cloudinary'
 import styles from './create-story.module.css'
 import Input from '../../../components/input/input'
 import UserContext from '../../../Contex'
 import Popup from '../../../components/popup/popup'
+import Button from '../../../components/submitButton/submitButton'
 
 const CreateStory = () => {
 
@@ -126,13 +126,7 @@ const CreateStory = () => {
                             />
                         </div>
                     )}
-                    <Link onClick={e => handleSubmitFile(e)}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                         Send
-                        </Link>
+                   <Button title='Send' onClick={e => handleSubmitFile(e)}/>
                 </form>
             </div>
             { error ? <Popup message={message} action={()=> setError(false)}/> : <span></span>}

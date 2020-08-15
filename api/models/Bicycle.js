@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Model = mongoose.model
-const { String, Number, ObjectId } = Schema.Types
+const { String, ObjectId } = Schema.Types
 
 const bicycleSchema = new Schema({
     startPoint: {
