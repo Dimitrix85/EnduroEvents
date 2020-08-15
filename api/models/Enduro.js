@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Model = mongoose.model
-const { String, ObjectId, Date } = Schema.Types
+const { String, ObjectId } = Schema.Types
 
-const motorcycleSchema = new Schema({
+const enduroSchema = new Schema({
     startPoint: {
         type: String,
         required: true
     },
     date: {
-        type: Date,
+        type: String,
         required: true
     },
     skillLevel: {
@@ -29,4 +29,4 @@ const motorcycleSchema = new Schema({
         required: true
     }
 })
-module.exports = new Model('Motorcycle', motorcycleSchema)
+module.exports = new Model('Enduro', enduroSchema)
