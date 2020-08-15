@@ -8,7 +8,7 @@ router.get('/top', controllers.story.get.top);
 
 router.get('/details', controllers.story.get.details);
 
-router.post('/', auth, controllers.story.post);
+router.post('/', controllers.story.post);
 
 router.put('/:id', controllers.story.put)
 

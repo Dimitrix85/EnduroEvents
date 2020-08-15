@@ -23,10 +23,7 @@ const enduroSchema = new Schema({
     participants: [{
         type: ObjectId,
         ref: 'User'
-    }],
-    created_at: {
-        type: String,
-        required: true
-    }
-})
+    }]
+}
+    , { timestamps: { createdAt: 'created_at' } })
 module.exports = new Model('Enduro', enduroSchema)

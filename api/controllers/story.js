@@ -4,7 +4,6 @@ const { model, Collection } = require('mongoose');
 module.exports = {
     get: {
         all: (req, res, next) => {
-            // const length = req.query.length ? parseInt(req.query.length) : 20
             models.Story.find().sort([['created_at', -1]]).populate('author')
                 .then((stories) => res.send(stories))
                 .catch(next);
@@ -37,8 +36,8 @@ module.exports = {
 
     },
     post: (req, res, next) => {
-        const { title, description, img, author, created_at } = req.body
-        models.Story.create({ title, description, img, author, created_at })
+        const { title, description, img, author } = req.body
+        models.Story.create({ title, description, img, author })
             .then(data => {
                 res.send(data)
             })

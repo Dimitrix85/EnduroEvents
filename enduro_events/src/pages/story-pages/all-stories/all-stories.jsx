@@ -24,6 +24,7 @@ class AllStories extends Component {
 
         const data = await res.json();
         const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
+
         const postData = slice.map((story,index) => {
             return (<StoryCard key={index} description={story.description}
                 title={story.title} img={story.img} id={story._id} />)
@@ -53,6 +54,7 @@ class AllStories extends Component {
     componentDidMount() {
         this.receivedData()
     }
+    
     render() {
         return (
             <PageLayout>

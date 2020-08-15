@@ -19,7 +19,7 @@ const storySchema = new Schema({
         type: Number,
         default: 0
     },
-    likes:[
+    likes: [
         {
             type: ObjectId,
             ref: 'User'
@@ -28,10 +28,6 @@ const storySchema = new Schema({
     author: {
         type: ObjectId,
         ref: 'User'
-    },
-    created_at: {
-        type: String,
-        required: true
     }
-})
+}, { timestamps: { createdAt: 'created_at' } })
 module.exports = new Model('Story', storySchema)
