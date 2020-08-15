@@ -20,19 +20,20 @@ module.exports = {
                 .catch((err) => res.status(500).send("Error"))
         }
     },
-    put: (req, res, next) => {
+    put: async (req, res, next) => {
         const id = req.params.id
         const { userId } = req.body
 
-        models.Story.update({ _id: id }, {
+        await models.Story.update({ _id: id }, {
             $addToSet: {
                 likes: [userId]
             }, $inc: {
                 like: 1
             }
         })
-            .then((updated) => res.send(updated))
-            .catch(next)
+
+        models.Story.findById(id)
+            .then(story => res.send(story))
 
     },
     post: (req, res, next) => {
