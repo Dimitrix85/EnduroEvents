@@ -37,8 +37,7 @@ const RegisterPage = () => {
         await authenticate('http://localhost:9999/api/user/register',
             {
                 username,
-                password,
-                created_at: new Date()
+                password
             }, (user) => {
                 context.logIn(user)
                 history.push('/')

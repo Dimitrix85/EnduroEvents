@@ -10,7 +10,7 @@ import UserContext from '../../../Contex';
 
 const CreateEnduro = () => {
 
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState()
     const [error, setError] = useState(false)
     const [message, setMessage] = useState('')
     const [skillLevel, setSkillLevel] = useState('')
@@ -31,8 +31,7 @@ const CreateEnduro = () => {
             startPoint,
             date,
             skillLevel,
-            author: context.user.id,
-            created_at: new Date()
+            author: context.user.id
         }
         await fetch('http://localhost:9999/api/enduro/', {
             method: 'POST',

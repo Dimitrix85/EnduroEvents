@@ -43,6 +43,7 @@ const StoryDetails = (props) => {
         const updatedJson = await updated.json()
 
         setLikes(updatedJson.like)
+        setCanLike(false)
     }
 
     useEffect(() => {

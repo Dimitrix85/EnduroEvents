@@ -8,6 +8,7 @@ import CreateStory from './pages/story-pages/create-story/create-story'
 import AllStories from './pages/story-pages/all-stories/all-stories'
 import StoryDetails from './pages/story-pages/story-details/story-details'
 import CreateEnduro from './pages/enduro-pages/create-enduro/create-enduro'
+import AllEnduro from './pages/enduro-pages/all-enduro/all-enduro'
 import UserContext from './Contex'
 
 const Navigation = () => {
@@ -28,13 +29,13 @@ const Navigation = () => {
                 <Route path='/story/create'>
                     {loggedIn ? (<CreateStory />) : (<LoginPage />)}
                 </Route>
-                        <Route path='/story/' exact component={AllStories} />
-                        <Route path='/story/:id' exact component={StoryDetails} />
-
-                        <Route path='/enduro/create'>
-                            {loggedIn ? (<CreateEnduro />) : (<LoginPage />)}
+                <Route path='/story/' exact component={AllStories} />
+                <Route path='/story/:id' exact component={StoryDetails} />
+                <Route path='/enduro/' exact component={AllEnduro} />
+                <Route path='/enduro/create'>
+                    {loggedIn ? (<CreateEnduro />) : (<LoginPage />)}
                 </Route>
-                                <Route component={ErrorPage} />
+                <Route component={ErrorPage} />
             </Switch>
         </BrowserRouter>
     )

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import {  useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import PageLayout from '../../../components/page-layout/page-layout'
 import Cloudinary from '../../../utils/cloudinary'
 import styles from './create-story.module.css'
@@ -51,8 +51,7 @@ const CreateStory = () => {
             story = {
                 title,
                 description,
-                author: context.user.id,
-                created_at: new Date()
+                author: context.user.id
             }
 
         } else {
@@ -65,13 +64,12 @@ const CreateStory = () => {
                     title,
                     description,
                     img: urlssss.secure_url,
-                    author: context.user.id,
-                    created_at: new Date()
+                    author: context.user.id
                 }
             }
         }
         setTimeout(async () => {
-         
+
             await fetch('http://localhost:9999/api/story/', {
                 method: 'POST',
                 body: JSON.stringify(story),
@@ -126,10 +124,10 @@ const CreateStory = () => {
                             />
                         </div>
                     )}
-                   <Button title='Send' onClick={e => handleSubmitFile(e)}/>
+                    <Button title='Send' onClick={e => handleSubmitFile(e)} />
                 </form>
             </div>
-            { error ? <Popup message={message} action={()=> setError(false)}/> : <span></span>}
+            {error ? <Popup message={message} action={() => setError(false)} /> : <span></span>}
         </PageLayout>
     )
 }

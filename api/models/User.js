@@ -18,15 +18,11 @@ const userSchema = new Schema({
         type: String,
         require: true
     },
-    
+
     stories: [{ type: ObjectId, ref: "Story" }],
     motorcycles: [{ type: ObjectId, ref: 'Motorcycle' }],
-    bycycles: [{ type: ObjectId, ref: 'Bicycle' }],
-    created_at: {
-        type: String,
-        required: true
-    }
-})
+    bycycles: [{ type: ObjectId, ref: 'Bicycle' }]
+}, { timestamps: { createdAt: 'created_at' } })
 userSchema.methods = {
 
     matchPassword: function (password) {
