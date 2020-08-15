@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom'
 import UserContext from '../../../Contex'
 import PageLayout from '../../../components/page-layout/page-layout'
 import styles from './story-details.module.css'
+import LikeIcon from '../../../public/like.png'
 
 const StoryDetails = (props) => {
     const [story, setStory] = useState({})
@@ -39,7 +40,7 @@ const StoryDetails = (props) => {
 
         const updatedJson = await updated.json()
 
-        setStory(updatedJson)
+        setLikes(updatedJson.like)
     }
 
     useEffect(() => {
@@ -56,7 +57,7 @@ const StoryDetails = (props) => {
                     <span>{date}</span>
                     <span>
                         <Link onClick={updateLike}>
-                            Likes: {story.like}
+                            <img width="30px" src={LikeIcon}/> {likes}
                         </Link>
                     </span>
                     <span>
