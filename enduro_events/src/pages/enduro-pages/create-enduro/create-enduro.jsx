@@ -25,6 +25,7 @@ const CreateEnduro = () => {
         if (!skillLevel || !startPoint || !date) {
             setMessage("All fields are require")
             setError(true)
+            return
         }
 
         const body = {
