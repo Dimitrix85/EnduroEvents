@@ -54,7 +54,8 @@ const StoryDetails = (props) => {
         <PageLayout>
             <div className={styles.details}>
                 <h1>{story.title}</h1>
-                <img src={story.img} alt="img" />
+                {story.img ? <img src={story.img} alt="img" /> : null}
+
                 <p>{story.description}</p>
                 <div>
                     <span>{date}</span>
