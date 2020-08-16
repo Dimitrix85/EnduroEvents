@@ -17,3 +17,4 @@ CLOUDINARY_NAME=
 4. Open comand prompt in api folder and write "npm start"
 5. Open comand prompt in enduro_events and write "npm install"
 6. Open comand prompt in enduro_events and write "npm start"
+7. Open your browser and go to "http://localhost:3000/"
