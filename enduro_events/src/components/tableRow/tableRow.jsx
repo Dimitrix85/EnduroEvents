@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TableRow = ({ handler, event, userId, key }) => {
+const TableRow = ({ handler, event, userId }) => {
 
     const isJoined = event.participants && event.participants.includes(userId)
 
@@ -22,7 +22,7 @@ const TableRow = ({ handler, event, userId, key }) => {
     }
 
     return (
-        <tr key={key}>
+        <tr >
             <td>{time}</td>
             <td>{event.startPoint}</td>
             <td>{event.skillLevel}</td>
